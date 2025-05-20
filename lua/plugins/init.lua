@@ -424,31 +424,4 @@ return {
       require("bufferline").setup {}
     end,
   },
-
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     require("catppuccin").setup({
-  --       transparent_background = true,
-  --       integrations = {
-  --         nvimtree = {
-  --           enabled = true,
-  --           transparent_panel = true, -- Transparent NvimTree panel
-  --         },
-  --         lualine = true,
-  --         telescope = {
-  --           enabled = true,
-  --           transparent = true, -- Transparent Telescope UI
-  --         },
-  --         notify = true,
-  --         which_key = true,
-  --       }
-  --     })
-  --     vim.cmd.colorscheme("catppuccin")
-  --   end
-  -- }
-
-
 }
