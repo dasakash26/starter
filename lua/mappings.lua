@@ -31,6 +31,31 @@ map("n", "<leader>oh", function()
   require("oil").open_keymaps_help()
 end, { desc = "Oil Keymaps Help" })
 
+-- Harpoon file bookmarks (using <leader>m prefix for "mark")
+map("n", "<leader>ma", function() require("harpoon.mark").add_file() end, { desc = "Mark File" })
+map("n", "<leader>mm", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "Marks Menu" })
+map("n", "<leader>m1", function() require("harpoon.ui").nav_file(1) end, { desc = "Mark 1" })
+map("n", "<leader>m2", function() require("harpoon.ui").nav_file(2) end, { desc = "Mark 2" })
+map("n", "<leader>m3", function() require("harpoon.ui").nav_file(3) end, { desc = "Mark 3" })
+
+-- Trouble diagnostics (under <leader>x prefix)
+map("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", { desc = "Document Diagnostics" })
+map("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", { desc = "Workspace Diagnostics" })
+map("n", "<leader>xL", "<cmd>TroubleToggle loclist<cr>", { desc = "Location List" })
+map("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", { desc = "Quickfix List" })
+
+-- Search and replace with Spectre (using <leader>s prefix)
+map("n", "<leader>sr", function() require("spectre").toggle() end, { desc = "Replace in Files" })
+map("n", "<leader>sw", function() require("spectre").open_visual({select_word=true}) end, { desc = "Replace Current Word" })
+
+-- Session management with Persistence
+map("n", "<leader>qs", function() require("persistence").load() end, { desc = "Restore Session" })
+map("n", "<leader>ql", function() require("persistence").load({ last = true }) end, { desc = "Restore Last Session" })
+map("n", "<leader>qd", function() require("persistence").stop() end, { desc = "Don't Save Session" })
+
+-- Todo comments
+map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find TODOs" })
+
 -- LSP mappings for navigation and documentation
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })

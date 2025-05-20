@@ -19,3 +19,18 @@ opt.completeopt = "menu,menuone,noselect"  -- Better completion experience
 opt.formatoptions:append("c")   -- Auto-wrap comments using textwidth
 opt.formatoptions:append("q")   -- Allow formatting comments with 'gq'
 opt.formatoptions:append("j")   -- Remove comment leader when joining lines
+
+-- Show pressed keys in the command line
+opt.showcmd = true
+opt.showcmdloc = "statusline"  -- Show in the status line (Neovim feature)
+
+-- Suppress various messages
+opt.shortmess:append("s")     -- Don't show "search hit BOTTOM" messages
+opt.shortmess:append("I")     -- Don't show intro message
+opt.shortmess:append("c")     -- Don't show ins-completion messages
+opt.shortmess:append("W")     -- Don't show "written" messages
+
+-- Don't show message on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function() vim.cmd("echon ''") end,
+})
