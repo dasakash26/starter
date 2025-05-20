@@ -13,6 +13,12 @@ map("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "Live Grep" })
 map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Show Buffers" })
 map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Help Tags" })
 
+-- C/C++ specific mappings
+map("n", "<leader>cc", ":Telescope lsp_incoming_calls<CR>", { desc = "C/C++: Show Callers" })
+map("n", "<leader>cr", ":Telescope lsp_references<CR>", { desc = "C/C++: Find References" })
+map("n", "<leader>ci", ":Telescope lsp_implementations<CR>", { desc = "C/C++: Find Implementations" })
+map("n", "<leader>cd", ":Telescope lsp_definitions<CR>", { desc = "C/C++: Find Definitions" })
+
 -- Oil mappings (under leader 'o' to avoid conflicts)
 -- Open Oil in normal mode using a dedicated prefix
 map("n", "<C-e>", ":Oil<CR>", { desc = "Open Oil Explorer" })
