@@ -55,18 +55,7 @@ M.ui = {
 M.base46 = {
   theme = "catppuccin",
   transparency = true,
-  hl_override = {
-    Comment = { italic = true },
-    ["@comment"] = { italic = true },
-
-    -- C/C++ specific highlighting improvements
-    ["@function.c"] = { bold = true },
-    ["@type.c"] = { italic = true },
-    ["@keyword.c"] = { bold = true },
-    ["@function.cpp"] = { bold = true },
-    ["@type.cpp"] = { italic = true },
-    ["@keyword.cpp"] = { bold = true },
-  },
+  hl_override = require("custom.highlights").override,
 }
 
 M.nvdash = {

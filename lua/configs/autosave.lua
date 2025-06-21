@@ -1,28 +1,32 @@
 return function()
   require("auto-save").setup({
-    enabled = true,
-    debounce_delay = 5000,
-    silent = true,
+    -- Completely disable auto-save
+    enabled = false,
+    
+    -- These settings will only apply if you manually enable it later
+    -- with the :ASToggle command
     execution_message = {
       message = function()
         return "" -- Return empty string to suppress message
       end,
     },
-    -- Disable all auto-save notifications
+    debounce_delay = 5000,
     write_all_buffers = false,
-    on_off_commands = false,
+    on_off_commands = true,
     clean_command_line_interval = 0,
     show_notification = false,
   })
   
-  -- Capture and suppress AutoSave messages via autocmd
+  -- Clear command line after any buffer write to hide "written" messages
   vim.api.nvim_create_autocmd({"BufWritePre", "BufWritePost"}, {
     pattern = "*",
     callback = function()
-      -- Clear command line immediately after any buffer write
       vim.defer_fn(function()
         vim.cmd("echo ''")
-      end, 1)
+      end, 10)
     end,
   })
+  
+  -- Print confirmation that auto-save is disabled
+  vim.notify("Auto-save has been disabled", vim.log.levels.INFO)
 end

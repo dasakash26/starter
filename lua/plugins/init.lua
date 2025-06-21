@@ -16,8 +16,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css", "tsx",
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "tsx",
       },
     },
   },
@@ -27,7 +31,7 @@ return {
   {
     "jose-elias-alvarez/typescript.nvim",
     config = function()
-      require("typescript").setup({
+      require("typescript").setup {
         server = {
           -- Optional tsserver settings
           -- Example: disable formatting if using other formatter
@@ -43,17 +47,17 @@ return {
             map("n", "<M-u>", ":TypescriptRemoveUnused<CR>", { desc = "Remove Unused Variables" })
           end,
         },
-      })
+      }
     end,
   },
 
   {
     "davidosomething/format-ts-errors.nvim",
     config = function()
-      require("format-ts-errors").setup({
+      require("format-ts-errors").setup {
         add_markdown = true,    -- wrap output with markdown ```ts ``` markers
         start_indent_level = 0, -- initial indent
-      })
+      }
     end,
   },
 
@@ -79,28 +83,28 @@ return {
       "saadparwaiz1/cmp_luasnip", -- Snippets completion
     },
     config = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
+      local cmp = require "cmp"
+      local luasnip = require "luasnip"
 
-      cmp.setup({
+      cmp.setup {
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
         mapping = {
-          ["<C-Space>"] = cmp.mapping.complete(),            -- Trigger completion manually
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection
-          ["<Tab>"] = cmp.mapping.select_next_item(),        -- Navigate down
-          ["<S-Tab>"] = cmp.mapping.select_prev_item(),      -- Navigate up
+          ["<C-Space>"] = cmp.mapping.complete(),           -- Trigger completion manually
+          ["<CR>"] = cmp.mapping.confirm { select = true }, -- Confirm selection
+          ["<Tab>"] = cmp.mapping.select_next_item(),       -- Navigate down
+          ["<S-Tab>"] = cmp.mapping.select_prev_item(),     -- Navigate up
         },
-        sources = cmp.config.sources({
+        sources = cmp.config.sources {
           { name = "nvim_lsp" }, -- LSP suggestions
           { name = "luasnip" },  -- Snippets
           { name = "buffer" },   -- Buffer words
           { name = "path" },     -- File path suggestions
-        }),
-      })
+        },
+      }
     end,
   },
 
@@ -108,7 +112,7 @@ return {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
     config = function()
-      require("lspsaga").setup({
+      require("lspsaga").setup {
         finder = {
           keys = {
             vsplit = "v",
@@ -116,16 +120,16 @@ return {
             edit = "o",
           },
         },
-        lightbulb = { enable = false }
-      })
+        lightbulb = { enable = false },
+      }
     end,
   },
 
-  {
-    "Pocco81/auto-save.nvim",
-    config = require("configs.autosave"),
-    lazy = false,
-  },
+  -- {
+  --   "Pocco81/auto-save.nvim",
+  --   config = require("configs.autosave"),
+  --   lazy = false,
+  -- },
 
   {
     "folke/noice.nvim",
@@ -133,7 +137,7 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify", -- Uses `nvim-notify`
     },
-    config = require("configs.noice"),
+    config = require "configs.noice",
     lazy = false,
   },
 
@@ -146,8 +150,8 @@ return {
   },
 
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
@@ -156,11 +160,11 @@ return {
   },
 
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     ---@module 'oil'
     opts = {},
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    config = require("configs.oil"),
+    config = require "configs.oil",
     lazy = false,
   },
 
@@ -168,12 +172,12 @@ return {
     "rafamadriz/friendly-snippets",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-    end
+    end,
   },
 
   {
     "j-hui/fidget.nvim",
-    opts = require("configs.fidget"),
+    opts = require "configs.fidget",
   },
 
   {
@@ -185,14 +189,14 @@ return {
   -- Only one instance of nvim-notify with config in separate file
   {
     "rcarriga/nvim-notify",
-    config = require("configs.notify"),
+    config = require "configs.notify",
   },
 
   -- 🪞 Statusline
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = require("configs.lualine"),
+    config = require "configs.lualine",
   },
 
   -- 🧩 Tabline
@@ -200,19 +204,19 @@ return {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = require("configs.bufferline"),
+    config = require "configs.bufferline",
   },
 
   -- 🔍 Fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    dependencies = { 
+    dependencies = {
       "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
-      require("telescope").setup({
+      require("telescope").setup {
         defaults = {
           mappings = {
             i = {
@@ -221,9 +225,9 @@ return {
             },
           },
         },
-      })
+      }
       -- Enable telescope fzf native
-      require("telescope").load_extension("fzf")
+      require("telescope").load_extension "fzf"
     end,
   },
 
@@ -241,7 +245,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
     config = function()
-      require("gitsigns").setup({
+      require("gitsigns").setup {
         signs = {
           add = { text = "│" },
           change = { text = "│" },
@@ -249,7 +253,7 @@ return {
           topdelete = { text = "‾" },
           changedelete = { text = "~" },
         },
-      })
+      }
     end,
   },
 
@@ -258,7 +262,7 @@ return {
     "ThePrimeagen/harpoon",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("harpoon").setup({})
+      require("harpoon").setup {}
     end,
     -- Keys defined in mappings.lua
   },
@@ -278,28 +282,7 @@ return {
     cmd = "Spectre",
     -- Keys defined in mappings.lua
   },
-  
-  -- 📝 Todo comments
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    event = "BufRead",
-    config = function()
-      require("todo-comments").setup({
-        -- Keywords recognized as todo comments
-        keywords = {
-          FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
-          TODO = { icon = " ", color = "info" },
-          HACK = { icon = " ", color = "warning" },
-          WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-          PERF = { icon = " ", color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-          NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-          TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
-        },
-      })
-    end,
-    -- Use telescope binding from the central keybindings file
-  },
+
   -- Alternative: which-key for showing available keybindings
   {
     "folke/which-key.nvim",
@@ -312,5 +295,17 @@ return {
       -- your configuration comes here
       -- or leave it empty to use the default settings
     },
+  },
+
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    config = function()
+      require("ufo").setup({
+        provider_selector = function(_, _, _)
+          return { "lsp", "indent" }
+        end
+      })
+    end,
   },
 }

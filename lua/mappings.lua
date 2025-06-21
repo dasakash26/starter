@@ -46,15 +46,13 @@ map("n", "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", { desc = "Quickfix Lis
 
 -- Search and replace with Spectre (using <leader>s prefix)
 map("n", "<leader>sr", function() require("spectre").toggle() end, { desc = "Replace in Files" })
-map("n", "<leader>sw", function() require("spectre").open_visual({select_word=true}) end, { desc = "Replace Current Word" })
+map("n", "<leader>sw", function() require("spectre").open_visual({ select_word = true }) end,
+  { desc = "Replace Current Word" })
 
 -- Session management with Persistence
 map("n", "<leader>qs", function() require("persistence").load() end, { desc = "Restore Session" })
 map("n", "<leader>ql", function() require("persistence").load({ last = true }) end, { desc = "Restore Last Session" })
 map("n", "<leader>qd", function() require("persistence").stop() end, { desc = "Don't Save Session" })
-
--- Todo comments
-map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find TODOs" })
 
 -- LSP mappings for navigation and documentation
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
@@ -94,3 +92,7 @@ map("n", "<C-`>", ":ToggleTerm<CR>", { desc = "Toggle Terminal" })
 
 -- (Optional) Additional mapping for Git integration via LazyGit, if installed
 map("n", "<leader>gg", ":LazyGit<CR>", { desc = "Open LazyGit" })
+
+-- Folding with nvim-ufo
+map("n", "zR", function() require("ufo").openAllFolds() end, { desc = "Open all folds" })
+map("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "Close all folds" })

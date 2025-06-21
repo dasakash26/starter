@@ -11,9 +11,9 @@ local options = {
     lsp_fallback = true,
   },
 
-  autosave_changes = {
-    timeout_ms = 1,
-  }
+  -- autosave_changes = {
+  --   timeout_ms = 10000,
+  -- }
 }
 
 return options
