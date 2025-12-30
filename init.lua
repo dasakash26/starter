@@ -10,14 +10,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
-vim.opt.termsync = false
-vim.keymap.set("n", "<leader>rr", function()
-  vim.cmd("w") -- Save the current file
-
-  local filepath = vim.fn.expand("%:p")
-  local cmd = string.format("ZED_FILE='%s' bash ~/.config/zed/cp_runfile.sh", filepath)
-  vim.cmd("vsplit | term " .. cmd)
-end, { desc = "Run cp_runfile.sh for current file" })
 
 local lazy_config = require "configs.lazy"
 
