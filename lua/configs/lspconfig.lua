@@ -4,9 +4,9 @@ local capabilities = default_config.capabilities
 
 -- List of LSP servers
 local servers = {
-  "ts_ls",  -- JavaScript/TypeScript
-  "html",   -- HTML
-  "cssls",  -- CSS
+  "ts_ls", -- JavaScript/TypeScript
+  "html", -- HTML
+  "cssls", -- CSS
   "jsonls", -- JSON
   "eslint", -- Linting JS/TS
   "clangd", -- C/C++
@@ -39,6 +39,14 @@ for _, server in ipairs(servers) do
       Lua = {
         diagnostics = { globals = { "vim" } },
         workspace = { checkThirdParty = false },
+      },
+    }
+  end
+  if server == "pyright" then
+    opts.settings = {
+      python = {
+        -- proper path to your venv when using uv
+        pythonPath = vim.fn.finddir(".venv", ".;") .. "/bin/python",
       },
     }
   end
