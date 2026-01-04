@@ -8,7 +8,8 @@ return {
         "pyright",
         "tailwindcss-language-server", -- Add this
         "prisma-language-server",
-        "typescript-language-server", },
+        "typescript-language-server",
+      },
     },
   },
 
@@ -49,6 +50,27 @@ return {
     },
   },
 
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = {
+      view = {
+        side = "right", -- Moves the tree to the right side
+      },
+      renderer = {
+        highlight_opened_files = "name", -- only highlight the name of the opened file
+      },
+      diagnostics = {
+        enable = true, -- Enables showing TS/LSP errors in the tree
+        show_on_dirs = true, -- Shows icons on parent folders if a file inside has an error
+        icons = {
+          hint = "󰌵",
+          info = "",
+          warning = "",
+          error = "",
+        },
+      },
+    },
+  },
   { import = "nvchad.blink.lazyspec" },
 
   {
@@ -84,8 +106,8 @@ return {
     config = function()
       require("notify").setup {
         background_colour = "#1a1b26", -- or "#000000"
-        render = "compact",            -- minimal look
-        stages = "fade_in_slide_out",  -- smooth transitions
+        render = "compact", -- minimal look
+        stages = "fade_in_slide_out", -- smooth transitions
         timeout = 3000,
       }
 
@@ -97,7 +119,7 @@ return {
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy", -- Or `LspAttach`
-    priority = 1000,    -- needs to be loaded in first
+    priority = 1000, -- needs to be loaded in first
     config = function()
       require("tiny-inline-diagnostic").setup()
       vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
