@@ -55,12 +55,13 @@ return {
     opts = {
       view = {
         side = "right", -- Moves the tree to the right side
+        width = 40,
       },
       renderer = {
         highlight_opened_files = "name", -- only highlight the name of the opened file
       },
       diagnostics = {
-        enable = true, -- Enables showing TS/LSP errors in the tree
+        enable = true,       -- Enables showing TS/LSP errors in the tree
         show_on_dirs = true, -- Shows icons on parent folders if a file inside has an error
         icons = {
           hint = "󰌵",
@@ -106,8 +107,8 @@ return {
     config = function()
       require("notify").setup {
         background_colour = "#1a1b26", -- or "#000000"
-        render = "compact", -- minimal look
-        stages = "fade_in_slide_out", -- smooth transitions
+        render = "compact",            -- minimal look
+        stages = "fade_in_slide_out",  -- smooth transitions
         timeout = 3000,
       }
 
@@ -119,7 +120,7 @@ return {
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy", -- Or `LspAttach`
-    priority = 1000, -- needs to be loaded in first
+    priority = 1000,    -- needs to be loaded in first
     config = function()
       require("tiny-inline-diagnostic").setup()
       vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
@@ -151,5 +152,34 @@ return {
     config = function()
       require("competitest").setup(require "configs.cphelper")
     end,
+  },
+
+  -- git plugins
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("git-conflict").setup {
+        default_mappings = true,
+        default_commands = true,
+        disable_diagnostics = true,
+        highlights = {
+          incoming = "DiffAdd",
+          current = "DiffText",
+        },
+      }
+    end,
+  },
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy",         -- or "BufReadPre" if you want it sooner
+    opts = {
+      enabled = false,          -- Start disabled (toggle with keymap)
+      message_template = "   <summary> • <date> • <author> • <sha>",
+      date_format = "%r",       -- Relative time: "3 days ago"
+      virtual_text_column = 80, -- Or 1 if you want it at start of line
+      -- Add any other options you want here
+    },
   },
 }
