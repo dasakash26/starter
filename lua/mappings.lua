@@ -1,10 +1,115 @@
 require "nvchad.mappings"
 
--- add yours here
-
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- Editing basics.
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("n", "j", "gj", { noremap = true, silent = true })
+map("n", "k", "gk", { noremap = true, silent = true })
+map("n", "<C-d>", "<C-d>zz", { desc = "Half page down + center" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Half page up + center" })
+map("n", "<C-f>", "<C-f>zz", { desc = "Page down + center" })
+map("n", "<C-b>", "<C-b>zz", { desc = "Page up + center" })
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+-- Search and navigation.
+map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Files" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Grep (text)" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Buffers" })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
+
+-- LSP lookup and diagnostics.
+map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Symbols (document)" })
+map("n", "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Symbols (workspace)" })
+map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line diagnostic" })
+
+-- Code helpers.
+map("n", "<leader>fi", "<cmd>Telescope import<CR>", { desc = "Imports" })
+
+-- File-level utility mappings.
+map("n", "<leader>yy", 'ggVG"+y', { desc = "Yank full file to clipboard" })
+map("n", "<leader>fp", function()
+  vim.notify(vim.fn.expand "%:p")
+end, { desc = "Show current file path" })
+map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+-- LSP lines are intentionally opt-in to keep diagnostics quiet by default.
+map("n", "<leader>l", function()
+  require("configs.lsp_lines").toggle()
+end, { desc = "Toggle LSP lines" })
+
+-- Trouble and TODO navigation. Use <leader>d* to avoid NvChad's <leader>x buffer close.
+map("n", "<leader>dd", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
+map("n", "<leader>dD", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Buffer diagnostics" })
+map("n", "<leader>do", "<cmd>Trouble symbols toggle focus=false<CR>", { desc = "Symbols" })
+map("n", "<leader>dl", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", { desc = "LSP references" })
+map("n", "<leader>dq", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix" })
+map("n", "<leader>dt", "<cmd>Trouble todo toggle<CR>", { desc = "TODOs" })
+map("n", "]t", function()
+  require("lazy").load { plugins = { "todo-comments.nvim" } }
+  require("todo-comments").jump_next()
+end, { desc = "Next TODO" })
+map("n", "[t", function()
+  require("lazy").load { plugins = { "todo-comments.nvim" } }
+  require("todo-comments").jump_prev()
+end, { desc = "Previous TODO" })
+
+-- File tree.
+map("n", "<leader>fe", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
+map("n", "<leader>E", "<cmd>NvimTreeFindFile<CR>", { desc = "Find current file" })
+
+-- Help shortcuts for plugins whose default keymaps are worth learning.
+map("n", "<leader>hs", function()
+  require("lazy").load { plugins = { "nvim-surround" } }
+  vim.cmd "help nvim-surround.usage"
+end, { desc = "Surround help" })
+map("n", "<leader>hS", function()
+  require("lazy").load { plugins = { "nvim-surround" } }
+  vim.cmd "help nvim-surround.keymaps"
+end, { desc = "Surround keymaps" })
+
+map("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
+
+-- Competitive programming.
+map("n", "<leader>tr", "<cmd>CompetiTest run<CR>", { desc = "Run Testcases", noremap = true, silent = true })
+map("n", "<leader>ta", "<cmd>CompetiTest add_testcase<CR>", { desc = "Add Testcase", noremap = true, silent = true })
+map("n", "<leader>te", "<cmd>CompetiTest edit_testcase<CR>", { desc = "Edit Testcase", noremap = true, silent = true })
+map(
+  "n",
+  "<leader>td",
+  "<cmd>CompetiTest delete_testcase<CR>",
+  { desc = "Delete Testcase", noremap = true, silent = true }
+)
+
+map(
+  "n",
+  "<leader>tp",
+  "<cmd>CompetiTest receive problem<CR>",
+  { desc = "Receive Problem", noremap = true, silent = true }
+)
+map(
+  "n",
+  "<leader>tc",
+  "<cmd>CompetiTest receive contest<CR>",
+  { desc = "Receive Contest", noremap = true, silent = true }
+)
+map(
+  "n",
+  "<leader>ts",
+  "<cmd>CompetiTest receive testcases<CR>",
+  { desc = "Receive Testcases", noremap = true, silent = true }
+)
+
+map(
+  "n",
+  "<leader>tS",
+  "<cmd>CompetiTest receive status<CR>",
+  { desc = "Receive Status", noremap = true, silent = true }
+)
+map(
+  "n",
+  "<leader>tP",
+  "<cmd>CompetiTest receive persistently<CR>",
+  { desc = "Start Persistent Receive", noremap = true, silent = true }
+)
+map("n", "<leader>tX", "<cmd>CompetiTest receive stop<CR>", { desc = "Stop Receiving", noremap = true, silent = true })
