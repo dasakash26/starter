@@ -18,42 +18,43 @@ M.nvdash = {
 
   header = {
     "",
-    [=[       /\                 /\       ]=],
-    [=[      / \'._   (\_/)   _.'/ \      ]=],
-    [=[     /_.''._'--('.')--'_.''._\     ]=],
-    [=[     | \_ / `;=/ " \=;` \ _/ |     ]=],
-    [=[      \/ `\__|`\___/`|__/` \/      ]=],
-    [=[              \(/|\)/              ]=],
-    "",
-    "night shift, ready to build",
+    "┌─────────────────────────────────────────────┐",
+    "│  ████  █   █ █   █ █████ █████ █   █ █████  │",
+    "│  █   █ █   █ ██  █   █     █   ██ ██ █      │",
+    "│  ████  █   █ █ █ █   █     █   █ █ █ ████   │",
+    "│  █  █  █   █ █  ██   █     █   █   █ █      │",
+    "│  █   █  ███  █   █   █   █████ █   █ █████  │",
+    "│                                             │",
+    "│        make the abstract executable         │",
+    "└─────────────────────────────────────────────┘",
     "",
   },
 
   buttons = {
-    { txt = "find file", keys = "ff", cmd = "Telescope find_files" },
-    { txt = "recent files", keys = "fr", cmd = "Telescope oldfiles" },
-    { txt = "search text", keys = "fg", cmd = "Telescope live_grep" },
-    { txt = "file tree", keys = "fe", cmd = "NvimTreeToggle" },
-    { txt = "diagnostics", keys = "dd", cmd = "Trouble diagnostics toggle" },
-    { txt = "todos", keys = "dt", cmd = "Trouble todo toggle" },
-    { txt = "plugins", keys = "ll", cmd = "Lazy" },
-    { txt = "tools", keys = "mm", cmd = "Mason" },
-    { txt = "mappings", keys = "ch", cmd = "NvCheatsheet" },
+    { txt = "  Find File", keys = "ff", cmd = "Telescope find_files" },
+    { txt = "  Recent Files", keys = "fr", cmd = "Telescope oldfiles" },
+    { txt = "󰈭  Search Text", keys = "fg", cmd = "Telescope live_grep" },
+    { txt = "󰙅  File Tree", keys = "fe", cmd = "NvimTreeToggle" },
+    { txt = "󰒡  Diagnostics", keys = "dd", cmd = "Trouble diagnostics toggle" },
+    { txt = "  TODOs", keys = "dt", cmd = "Trouble todo toggle" },
+    { txt = "󰒲  Plugins", keys = "ll", cmd = "Lazy" },
+    { txt = "󰏗  Tools", keys = "mm", cmd = "Mason" },
+    { txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },
 
-    { txt = "-", hl = "NvDashFooter", no_gap = true, rep = true },
+    { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
 
     {
       txt = function()
         local stats = require("lazy").stats()
         local ms = math.floor(stats.startuptime) .. " ms"
-        return "ready with " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+        return "  Runtime loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
       end,
       hl = "NvDashFooter",
       no_gap = true,
       content = "fit",
     },
 
-    { txt = "-", hl = "NvDashFooter", no_gap = true, rep = true },
+    { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
   },
 }
 M.ui = {
