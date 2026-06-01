@@ -9,8 +9,20 @@ return {
 
   {
     "windwp/nvim-ts-autotag",
-    event = { "BufReadPost", "BufNewFile" },
+    ft = { "html", "javascriptreact", "typescriptreact", "vue", "svelte", "astro", "xml", "markdown" },
     opts = {},
+  },
+
+  -- File operations load with nvim-tree; LSP capabilities are declared in lspconfig.
+  {
+    "antosha417/nvim-lsp-file-operations",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-tree.lua",
+    },
+    config = function()
+      require("lsp-file-operations").setup()
+    end,
   },
 
   -- Language tooling: base LSP first, then language-specific helpers.
@@ -22,26 +34,19 @@ return {
   },
 
   {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "youyoumu/pretty-ts-errors.nvim",
     ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-    opts = {},
-  },
-
-  {
-    "dmmulroy/ts-error-translator.nvim",
-    event = "LspAttach",
+    cmd = { "PrettyTsError", "PrettyTsErrors", "PrettyTsToggleAuto" },
     opts = {
-      auto_attach = true,
+      float_opts = {
+        border = "rounded",
+        max_width = 80,
+        max_height = 20,
+        wrap = true,
+      },
+      auto_open = true,
+      lazy_window = true,
     },
-  },
-
-  {
-    "erichdongubler/lsp_lines.nvim",
-    event = "LspAttach",
-    config = function()
-      require "configs.lsp_lines"
-    end,
   },
 
   -- Diagnostics and TODO views.
@@ -54,7 +59,7 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
-    event = "VimEnter",
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("todo-comments").setup {}
     end,
@@ -67,15 +72,27 @@ return {
     opts = require "configs.conform",
   },
 
+  -- Autosave triggers real writes; Conform still formats on BufWritePre.
+  {
+    "okuuva/auto-save.nvim",
+    version = "^1.0.0",
+    event = { "InsertLeave", "TextChanged", "BufLeave", "FocusLost" },
+    cmd = "ASToggle",
+    keys = {
+      { "<leader>ua", "<cmd>ASToggle<CR>", desc = "Toggle autosave" },
+    },
+    opts = require "configs.autosave",
+  },
+
   -- Editor workflow helpers with small inline configs.
   {
     "nvim-tree/nvim-tree.lua",
-    opts = {
-      view = {
-        side = "right",
-        width = 40,
-      },
-    },
+    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
+    opts = require "configs.nvimtree",
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
+      require("lazy").load { plugins = { "nvim-lsp-file-operations" }, wait = true }
+    end,
   },
 
   {

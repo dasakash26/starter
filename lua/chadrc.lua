@@ -107,7 +107,11 @@ M.nvdash = {
     dash_button("󰈭  Search Text", "fg", "Telescope live_grep"),
     dash_button("󰙅  File Tree", "fe", "NvimTreeToggle"),
     dash_button("󰒡  Diagnostics", "dd", "Trouble diagnostics toggle"),
-    dash_button("  TODOs", "dt", "Trouble todo toggle"),
+    dash_button(
+      "  TODOs",
+      "dt",
+      "lua require('lazy').load({ plugins = { 'todo-comments.nvim' }, wait = true }); vim.schedule(function() vim.cmd('TodoTrouble') end)"
+    ),
     dash_button("󰒲  Plugins", "ll", "Lazy"),
     dash_button("󰏗  Tools", "mm", "Mason"),
     dash_button("  Mappings", "ch", "NvCheatsheet"),
@@ -136,7 +140,7 @@ M.nvdash = {
 
 M.ui = {
   tabufline = {
-    lazyload = false,
+    lazyload = true,
     order = { "buffers", "tabs", "btns" },
   },
 }

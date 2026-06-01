@@ -1,4 +1,28 @@
-require("nvchad.configs.lspconfig").defaults()
+local nvchad_lsp = require "nvchad.configs.lspconfig"
+
+nvchad_lsp.defaults()
+
+local file_operation_capabilities = {
+  workspace = {
+    fileOperations = {
+      didCreate = true,
+      didDelete = true,
+      didRename = true,
+      willCreate = true,
+      willDelete = true,
+      willRename = true,
+    },
+  },
+}
+
+nvchad_lsp.capabilities = vim.tbl_deep_extend("force", nvchad_lsp.capabilities, file_operation_capabilities)
+
+vim.lsp.config("*", {
+  capabilities = nvchad_lsp.capabilities,
+  on_init = nvchad_lsp.on_init,
+})
+
+require "configs.lsp_lines"
 
 -- define clangd FIRST
 vim.lsp.config("clangd", {
@@ -18,12 +42,24 @@ vim.lsp.config("rust_analyzer", {
   },
 })
 
+vim.lsp.config("vtsls", {
+  settings = {
+    javascript = {
+      updateImportsOnFileMove = { enabled = "always" },
+    },
+    typescript = {
+      updateImportsOnFileMove = { enabled = "always" },
+    },
+  },
+})
+
 local servers = {
   "html",
   "cssls",
   "jsonls",
   "eslint",
   "tailwindcss",
+  "vtsls",
   "emmet_language_server",
   "bashls",
   "dockerls",

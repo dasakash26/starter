@@ -1,28 +1,32 @@
 local M = {}
 
-if vim.islist then
-  vim.tbl_islist = vim.islist
+local enabled = false
+local float_opts = { border = "rounded", focusable = false, source = "if_many" }
+
+local function set_config(opts)
+  pcall(vim.diagnostic.config, opts)
 end
 
-require("lsp_lines").setup()
-
-vim.diagnostic.config {
-  virtual_text = false,
-  virtual_lines = false,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-  float = {
-    border = "rounded",
-    focusable = false,
-    source = "if_many",
-  },
-}
+set_config({ virtual_text = false, virtual_lines = false, float = float_opts })
 
 function M.toggle()
-  local enabled = require("lsp_lines").toggle()
-  vim.diagnostic.config { virtual_text = false }
+  enabled = not enabled
+  local ok = pcall(vim.diagnostic.config, { virtual_text = false, virtual_lines = enabled, float = float_opts })
+  if not ok then
+    local ok2 = pcall(vim.diagnostic.config, { virtual_text = enabled, virtual_lines = false, float = float_opts })
+    if ok2 then
+      vim.notify("virtual_lines unsupported — falling back to virtual_text", vim.log.levels.WARN)
+    else
+      vim.notify("Failed to set diagnostics configuration", vim.log.levels.ERROR)
+    end
+  else
+    vim.notify("Diagnostic virtual lines " .. (enabled and "enabled" or "disabled"))
+  end
   return enabled
+end
+
+function M.open_float()
+  vim.diagnostic.open_float(nil, vim.tbl_extend("force", float_opts, { scope = "cursor" }))
 end
 
 return M

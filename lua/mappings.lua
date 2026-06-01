@@ -21,10 +21,18 @@ map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
 -- LSP lookup and diagnostics.
 map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Symbols (document)" })
 map("n", "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Symbols (workspace)" })
-map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line diagnostic" })
+map("n", "<leader>dl", function()
+  require("configs.lsp_lines").open_float()
+end, { desc = "Line diagnostic" })
+map("n", "<leader>dp", "<cmd>PrettyTsError<CR>", { desc = "TS error popup" })
+map("n", "<leader>dP", "<cmd>PrettyTsErrors<CR>", { desc = "TS errors list" })
+map("n", "<leader>du", "<cmd>PrettyTsToggleAuto<CR>", { desc = "Toggle TS error popup" })
 
 -- Code helpers.
-map("n", "<leader>fi", "<cmd>Telescope import<CR>", { desc = "Imports" })
+map("n", "<leader>fi", function()
+  require("lazy").load { plugins = { "telescope-import.nvim" }, wait = true }
+  vim.cmd "Telescope import"
+end, { desc = "Imports" })
 
 -- File-level utility mappings.
 map("n", "<leader>yy", 'ggVG"+y', { desc = "Yank full file to clipboard" })
@@ -42,16 +50,25 @@ end, { desc = "Toggle LSP lines" })
 map("n", "<leader>dd", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
 map("n", "<leader>dD", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Buffer diagnostics" })
 map("n", "<leader>do", "<cmd>Trouble symbols toggle focus=false<CR>", { desc = "Symbols" })
-map("n", "<leader>dl", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", { desc = "LSP references" })
+map("n", "<leader>dr", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", { desc = "LSP references" })
 map("n", "<leader>dq", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix" })
-map("n", "<leader>dt", "<cmd>Trouble todo toggle<CR>", { desc = "TODOs" })
+map("n", "<leader>dt", function()
+  require("lazy").load { plugins = { "todo-comments.nvim" }, wait = true }
+  vim.schedule(function()
+    vim.cmd "TodoTrouble"
+  end)
+end, { desc = "TODOs" })
 map("n", "]t", function()
-  require("lazy").load { plugins = { "todo-comments.nvim" } }
-  require("todo-comments").jump_next()
+  require("lazy").load { plugins = { "todo-comments.nvim" }, wait = true }
+  vim.schedule(function()
+    require("todo-comments").jump_next()
+  end)
 end, { desc = "Next TODO" })
 map("n", "[t", function()
-  require("lazy").load { plugins = { "todo-comments.nvim" } }
-  require("todo-comments").jump_prev()
+  require("lazy").load { plugins = { "todo-comments.nvim" }, wait = true }
+  vim.schedule(function()
+    require("todo-comments").jump_prev()
+  end)
 end, { desc = "Previous TODO" })
 
 -- File tree.
