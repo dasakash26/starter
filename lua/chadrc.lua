@@ -7,7 +7,7 @@ local M = {}
 
 -- Dashboard helpers keep the whole NvDash panel aligned as one box.
 local dash_gutter = ""
-local dash_inner_width = 67
+local dash_inner_width = 66
 
 local function dash_wrap(line)
   return dash_gutter .. line .. dash_gutter
@@ -51,10 +51,10 @@ local function dash_button(label, keys, cmd)
     no_gap = true,
     keys = keys,
     cmd = cmd,
-    { txt = dash_gutter .. "│      ", hl = "NvDashAscii" },
+    { txt = dash_gutter .. "│        ", hl = "NvDashBorder" },
     { txt = label, hl = "NvdashButtons", pad = "full" },
     { txt = keys, hl = "NvDashFooter" },
-    { txt = "  │" .. dash_gutter, hl = "NvDashAscii" },
+    { txt = "   │" .. dash_gutter, hl = "NvDashBorder" },
   }
 end
 
@@ -72,6 +72,7 @@ M.base46 = {
   hl_override = {
     Comment = { italic = true },
     NvDashAscii = { fg = "#89b4fa" },
+    NvDashBorder = { fg = "#89b4fa" },
     NvDashFooter = { fg = "#f5c2e7" },
     NvdashButtons = { fg = "#cdd6f4" },
     ["@comment"] = { italic = true },
@@ -86,12 +87,18 @@ M.nvdash = {
     dash_border_top,
     dash_empty,
 
-    dash_center "██████   ██   ██  ██   ██  ███████  ███████  ██   ██  ███████",
-    dash_center "██   ██  ██   ██  ███  ██    ███      ███    ███ ███  ██     ",
-    dash_center "██████   ██   ██  ████ ██    ███      ███    ███████  ██████ ",
-    dash_center "██  ██   ██   ██  ██ ████    ███      ███    ██ █ ██  ██     ",
-    dash_center "██   ██   █████   ██  ███    ███    ███████  ██   ██  ███████",
+    dash_center "██████  ██    ██ ███    ██ ████████ ██ ███    ███ ███████",
+    dash_center "██   ██ ██    ██ ████   ██    ██    ██ ████  ████ ██     ",
+    dash_center "██████  ██    ██ ██ ██  ██    ██    ██ ██ ████ ██ █████  ",
+    dash_center "██  ██  ██    ██ ██  ██ ██    ██    ██ ██  ██  ██ ██     ",
+    dash_center "██   ██  ██████  ██   ████    ██    ██ ██      ██ ███████",
 
+    dash_empty,
+    dash_center "⠀⢀⣀⣀⣀⠀⠀⠀⠀⢀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    dash_center "⠀⢸⣿⣿⡿⢀⣠⣴⣾⣿⣿⣿⣿⣇⡀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    dash_center "⠀⢸⣿⣿⠟⢋⡙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣿⡿⠓⡐⠒⢶⣤⣄⡀⠀⠀",
+    dash_center "⠀⠸⠿⠇⢰⣿⣿⡆⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⣿⡷⠈⣿⣿⣉⠁⠀",
+    dash_center "⠀⠀⠀⠀⠀⠈⠉⠀⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠈⠉⠁⠀⠈⠉⠉⠀⠀",
     dash_empty,
     dash_center "make the abstract executable",
     dash_empty,
@@ -106,19 +113,25 @@ M.nvdash = {
     dash_button("  Recent Files", "fr", "Telescope oldfiles"),
     dash_button("󰈭  Search Text", "fg", "Telescope live_grep"),
     dash_button("󰙅  File Tree", "fe", "NvimTreeToggle"),
+
+    dash_empty_button(),
+
     dash_button("󰒡  Diagnostics", "dd", "Trouble diagnostics toggle"),
     dash_button(
       "  TODOs",
       "dt",
       "lua require('lazy').load({ plugins = { 'todo-comments.nvim' }, wait = true }); vim.schedule(function() vim.cmd('TodoTrouble') end)"
     ),
+
+    dash_empty_button(),
+
     dash_button("󰒲  Plugins", "ll", "Lazy"),
     dash_button("󰏗  Tools", "mm", "Mason"),
     dash_button("  Mappings", "ch", "NvCheatsheet"),
 
     dash_empty_button(),
 
-    { txt = dash_border_mid, hl = "NvDashFooter", no_gap = true },
+    { txt = dash_border_mid, hl = "NvDashBorder", no_gap = true },
 
     dash_empty_button "NvDashFooter",
 
@@ -134,7 +147,7 @@ M.nvdash = {
 
     dash_empty_button "NvDashFooter",
 
-    { txt = dash_border_bottom, hl = "NvDashFooter", no_gap = true },
+    { txt = dash_border_bottom, hl = "NvDashBorder", no_gap = true },
   },
 }
 

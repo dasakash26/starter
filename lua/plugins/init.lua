@@ -37,16 +37,12 @@ return {
     "youyoumu/pretty-ts-errors.nvim",
     ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
     cmd = { "PrettyTsError", "PrettyTsErrors", "PrettyTsToggleAuto" },
-    opts = {
-      float_opts = {
-        border = "rounded",
-        max_width = 80,
-        max_height = 20,
-        wrap = true,
-      },
-      auto_open = true,
-      lazy_window = true,
-    },
+    opts = require "configs.pretty_ts_errors",
+    config = function(_, opts)
+      local pretty_ts_errors = require "pretty-ts-errors"
+      pretty_ts_errors.setup(opts)
+      require("configs.pretty_ts_errors").setup()
+    end,
   },
 
   -- Diagnostics and TODO views.
