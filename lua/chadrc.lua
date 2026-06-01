@@ -51,7 +51,7 @@ local function dash_button(label, keys, cmd)
     no_gap = true,
     keys = keys,
     cmd = cmd,
-    { txt = dash_gutter .. "│    ", hl = "NvDashAscii" },
+    { txt = dash_gutter .. "│      ", hl = "NvDashAscii" },
     { txt = label, hl = "NvdashButtons", pad = "full" },
     { txt = keys, hl = "NvDashFooter" },
     { txt = "  │" .. dash_gutter, hl = "NvDashAscii" },
@@ -83,25 +83,17 @@ M.nvdash = {
 
   header = {
     "",
-    "",
     dash_border_top,
-
-    dash_empty,
     dash_empty,
 
-    dash_center "████  █   █ █   █ █████ █████ █   █ █████",
-    dash_center "█   █ █   █ ██  █   █     █   ██ ██ █    ",
-    dash_center "████  █   █ █ █ █   █     █   █ █ █ ████ ",
-    dash_center "█  █  █   █ █  ██   █     █   █   █ █    ",
-    dash_center "█   █  ███  █   █   █   █████ █   █ █████",
+    dash_center "██████   ██   ██  ██   ██  ███████  ███████  ██   ██  ███████",
+    dash_center "██   ██  ██   ██  ███  ██    ███      ███    ███ ███  ██     ",
+    dash_center "██████   ██   ██  ████ ██    ███      ███    ███████  ██████ ",
+    dash_center "██  ██   ██   ██  ██ ████    ███      ███    ██ █ ██  ██     ",
+    dash_center "██   ██   █████   ██  ███    ███    ███████  ██   ██  ███████",
 
     dash_empty,
-    dash_empty,
-
     dash_center "make the abstract executable",
-
-    dash_empty,
-    dash_empty,
     dash_empty,
 
     dash_section "actions",
@@ -109,21 +101,17 @@ M.nvdash = {
 
   buttons = {
     dash_empty_button(),
-    dash_empty_button(),
 
     dash_button("  Find File", "ff", "Telescope find_files"),
     dash_button("  Recent Files", "fr", "Telescope oldfiles"),
     dash_button("󰈭  Search Text", "fg", "Telescope live_grep"),
-    dash_empty_button(),
     dash_button("󰙅  File Tree", "fe", "NvimTreeToggle"),
     dash_button("󰒡  Diagnostics", "dd", "Trouble diagnostics toggle"),
     dash_button("  TODOs", "dt", "Trouble todo toggle"),
     dash_button("󰒲  Plugins", "ll", "Lazy"),
-    dash_empty_button(),
     dash_button("󰏗  Tools", "mm", "Mason"),
     dash_button("  Mappings", "ch", "NvCheatsheet"),
 
-    dash_empty_button(),
     dash_empty_button(),
 
     { txt = dash_border_mid, hl = "NvDashFooter", no_gap = true },
@@ -161,7 +149,7 @@ M.mason = {
     "eslint-lsp",
     "tailwindcss-language-server",
     "emmet-language-server",
-    "typescript-language-server",
+    "vtsls",
     "bash-language-server",
     "dockerfile-language-server",
     "yaml-language-server",
