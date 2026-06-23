@@ -12,6 +12,16 @@ map("n", "<C-u>", "<C-u>zz", { desc = "Half page up + center" })
 map("n", "<C-f>", "<C-f>zz", { desc = "Page down + center" })
 map("n", "<C-b>", "<C-b>zz", { desc = "Page up + center" })
 
+-- Move lines up/down
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+-- Better indenting in visual mode
+map("v", "<", "<gv", { desc = "Indent left and reselect" })
+map("v", ">", ">gv", { desc = "Indent right and reselect" })
+
 -- Search and navigation.
 map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Grep (text)" })
@@ -36,7 +46,7 @@ end, { desc = "Imports" })
 
 -- File-level utility mappings.
 map("n", "<leader>yy", 'ggVG"+y', { desc = "Yank full file to clipboard" })
-map("n", "<leader>fp", function()
+map("n", "<leader>yf", function()
   vim.notify(vim.fn.expand "%:p")
 end, { desc = "Show current file path" })
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

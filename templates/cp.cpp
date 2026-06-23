@@ -8,18 +8,17 @@ ZZZzz /,`.-'`'    -.  ;-;;,_
  */
 
 #include <iostream>
-#include <vector>
 using namespace std;
 
 using ll = long long;
 
 #define endl '\n'
-#define dbg(x) cerr << #x << " = " << x << '\n'
+#define l(x) cerr << #x << " = " << x << '\n'
 
 #define p(x) cout << x << endl;
 #define ps(x) cout << x << ' ';
 
-#define all(x) ((x).begin(), (x).end());
+#define all(x) ((x).begin(), (x).end())
 
 void solve() {
   // code

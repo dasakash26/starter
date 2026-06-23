@@ -23,7 +23,7 @@ local function dash_named_rule(left, label, right)
   return dash_wrap(left .. title .. string.rep("─", math.max(fill, 0)) .. right)
 end
 
-local dash_border_top = dash_named_rule("┌", "runtime://workspace", "┐")
+local dash_border_top = dash_named_rule("┌", "dasakash26://workspace", "┐")
 local dash_border_mid = dash_rule("├", "┤")
 local dash_border_bottom = dash_rule("└", "┘")
 
@@ -51,7 +51,7 @@ local function dash_button(label, keys, cmd)
     no_gap = true,
     keys = keys,
     cmd = cmd,
-    { txt = dash_gutter .. "│        ", hl = "NvDashBorder" },
+    { txt = dash_gutter .. "│    ", hl = "NvDashBorder" },
     { txt = label, hl = "NvdashButtons", pad = "full" },
     { txt = keys, hl = "NvDashFooter" },
     { txt = "   │" .. dash_gutter, hl = "NvDashBorder" },
@@ -86,27 +86,38 @@ M.nvdash = {
     "",
     dash_border_top,
     dash_empty,
+    dash_empty,
+    dash_empty,
 
-    dash_center "██████  ██    ██ ███    ██ ████████ ██ ███    ███ ███████",
-    dash_center "██   ██ ██    ██ ████   ██    ██    ██ ████  ████ ██     ",
-    dash_center "██████  ██    ██ ██ ██  ██    ██    ██ ██ ████ ██ █████  ",
-    dash_center "██  ██  ██    ██ ██  ██ ██    ██    ██ ██  ██  ██ ██     ",
-    dash_center "██   ██  ██████  ██   ████    ██    ██ ██      ██ ███████",
+    -- dash_center "██████  ██    ██ ███    ██ ████████ ██ ███    ███ ███████",
+    -- dash_center "██   ██ ██    ██ ████   ██    ██    ██ ████  ████ ██     ",
+    -- dash_center "██████  ██    ██ ██ ██  ██    ██    ██ ██ ████ ██ █████  ",
+    -- dash_center "██  ██  ██    ██ ██  ██ ██    ██    ██ ██  ██  ██ ██     ",
+    -- dash_center "██   ██  ██████  ██   ████    ██    ██ ██      ██ ███████",
+    --
+    dash_center "▄██████ ▄██ ▄██ ▄██████ ▄████████ ▄██ ▄██████████ ▄██████",
+    dash_center "██▓▀█▓█ ██▓ █▓█ ██▓▀█▓█ ▀▀▀██▓▀▀  ██▓ ██▓▀█▓█▀█▓█ ██▓▀▀▀ ",
+    dash_center "█▓▒▒▒▒▓ █▓▒ █▒▓ █▓▒ █▒▓    █▓▓    █▓▒ █▓▒ █▒▓ █▒▓ █▓▓▒▓▒ ",
+    dash_center "█░░█░░  █▒░ █░▒ █▒░ █░▒    █▒░    █▒░ █▒░ █░▒ █░▒ █▒░▀▀  ",
+    dash_center "█░ ▀█░  █░    ░ █░  █ ░    █░     █░  █░  ▀▀  █ ░ █░     ",
+    dash_center "▀▀  ▀▀  ▀▀▀▀▀▀  ▀▀▀ ▀▀     ▀▀▀    ▀▀▀ ▀▀▀     ▀▀  ▀▀▀▀▀▀ ",
 
     dash_empty,
-    dash_center "⠀⢀⣀⣀⣀⠀⠀⠀⠀⢀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-    dash_center "⠀⢸⣿⣿⡿⢀⣠⣴⣾⣿⣿⣿⣿⣇⡀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-    dash_center "⠀⢸⣿⣿⠟⢋⡙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣿⡿⠓⡐⠒⢶⣤⣄⡀⠀⠀",
-    dash_center "⠀⠸⠿⠇⢰⣿⣿⡆⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⣿⡷⠈⣿⣿⣉⠁⠀",
-    dash_center "⠀⠀⠀⠀⠀⠈⠉⠀⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠈⠉⠁⠀⠈⠉⠉⠀⠀",
+    -- dash_center "⠀⢀⣀⣀⣀⠀⠀⠀⠀⢀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    -- dash_center "⠀⢸⣿⣿⡿⢀⣠⣴⣾⣿⣿⣿⣿⣇⡀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+    -- dash_center "⠀⢸⣿⣿⠟⢋⡙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣿⡿⠓⡐⠒⢶⣤⣄⡀⠀⠀",
+    -- dash_center "⠀⠸⠿⠇⢰⣿⣿⡆⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⣿⡷⠈⣿⣿⣉⠁⠀",
+    -- dash_center "⠀⠀⠀⠀⠀⠈⠉⠀⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠈⠉⠁⠀⠈⠉⠉⠀⠀",
     dash_empty,
-    dash_center "make the abstract executable",
+    dash_center "MAKE THE ABSTRACT EXECUTABLE",
+    dash_empty,
     dash_empty,
 
     dash_section "actions",
   },
 
   buttons = {
+    dash_empty_button(),
     dash_empty_button(),
 
     dash_button("  Find File", "ff", "Telescope find_files"),
@@ -130,6 +141,7 @@ M.nvdash = {
     dash_button("  Mappings", "ch", "NvCheatsheet"),
 
     dash_empty_button(),
+    dash_empty_button(),
 
     { txt = dash_border_mid, hl = "NvDashBorder", no_gap = true },
 
@@ -152,6 +164,14 @@ M.nvdash = {
 }
 
 M.ui = {
+  cmp = {
+    icons = true,
+    style = "flat_dark",
+    
+  },
+  telescope = {
+    style = "bordered",
+  },
   tabufline = {
     lazyload = true,
     order = { "buffers", "tabs", "btns" },

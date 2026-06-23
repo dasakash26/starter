@@ -53,6 +53,20 @@ vim.lsp.config("vtsls", {
   },
 })
 
+vim.lsp.config("tailwindcss", {
+  filetypes = {
+    "html",
+    "css",
+    "scss",
+    "javascript",
+    "javascriptreact",
+    "typescriptreact",
+    "vue",
+    "svelte",
+    "astro",
+  },
+})
+
 local servers = {
   "html",
   "cssls",
