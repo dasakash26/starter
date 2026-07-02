@@ -13,6 +13,16 @@ return {
     opts = {},
   },
 
+  {
+    "xiyaowong/transparent.nvim",
+    lazy = false,
+    config = function()
+      require("transparent").setup()
+      require("transparent").clear_prefix "NvimTree"
+      require("transparent").clear_prefix "NvDash"
+      require("transparent").clear_prefix "Tb"
+    end,
+  },
   -- File operations load with nvim-tree; LSP capabilities are declared in lspconfig.
   {
     "antosha417/nvim-lsp-file-operations",
@@ -52,15 +62,6 @@ return {
     opts = {},
   },
 
-  {
-    "folke/todo-comments.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("todo-comments").setup {}
-    end,
-  },
-
   -- Formatting runs on write; detailed formatter setup lives in configs/conform.lua.
   {
     "stevearc/conform.nvim",
@@ -87,7 +88,7 @@ return {
     opts = require "configs.nvimtree",
     config = function(_, opts)
       require("nvim-tree").setup(opts)
-      require("lazy").load { plugins = { "nvim-lsp-file-operations" }, wait = true }
+      require("lazy").load { plugins = { "nvim-lsp-file-operations" } }
     end,
   },
 

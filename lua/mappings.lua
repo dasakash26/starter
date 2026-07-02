@@ -49,7 +49,7 @@ map("n", "<leader>yy", 'ggVG"+y', { desc = "Yank full file to clipboard" })
 map("n", "<leader>yf", function()
   vim.notify(vim.fn.expand "%:p")
 end, { desc = "Show current file path" })
-map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr>")
 
 -- LSP lines are intentionally opt-in to keep diagnostics quiet by default.
 map("n", "<leader>l", function()
@@ -82,8 +82,22 @@ map("n", "[t", function()
 end, { desc = "Previous TODO" })
 
 -- File tree.
-map("n", "<leader>fe", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
-map("n", "<leader>E", "<cmd>NvimTreeFindFile<CR>", { desc = "Find current file" })
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
+map("n", "<leader>ee", "<cmd>NvimTreeFindFile<CR>", { desc = "Find current file" })
+
+-- Move buffers in tabufline.
+map("n", "<A-S-h>", function()
+  require("nvchad.tabufline").move_buf(-1)
+end, { desc = "Move buffer left" })
+map("n", "<A-S-l>", function()
+  require("nvchad.tabufline").move_buf(1)
+end, { desc = "Move buffer right" })
+map("n", "<leader>bh", function()
+  require("nvchad.tabufline").move_buf(-1)
+end, { desc = "Move buffer left" })
+map("n", "<leader>bl", function()
+  require("nvchad.tabufline").move_buf(1)
+end, { desc = "Move buffer right" })
 
 -- Help shortcuts for plugins whose default keymaps are worth learning.
 map("n", "<leader>hs", function()

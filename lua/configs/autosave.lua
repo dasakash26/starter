@@ -14,7 +14,6 @@ return {
     cancel_deferred_save = { "InsertEnter" },
   },
 
-  -- Only save real editable files, not sidebars, prompts, or plugin windows.
   condition = function(buf)
     local bo = vim.bo[buf]
     local name = vim.api.nvim_buf_get_name(buf)
@@ -27,5 +26,5 @@ return {
   end,
 
   debounce_delay = 1000,
-  noautocmd = false,
+  noautocmd = true,
 }

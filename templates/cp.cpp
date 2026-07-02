@@ -18,7 +18,7 @@ using ll = long long;
 #define p(x) cout << x << endl;
 #define ps(x) cout << x << ' ';
 
-#define all(x) ((x).begin(), (x).end())
+#define all(x) (x).begin(), (x).end()
 
 void solve() {
   // code
