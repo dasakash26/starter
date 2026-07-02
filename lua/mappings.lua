@@ -25,7 +25,6 @@ map("v", ">", ">gv", { desc = "Indent right and reselect" })
 -- Search and navigation.
 map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Grep (text)" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Buffers" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
 
 -- LSP lookup and diagnostics.
@@ -62,25 +61,7 @@ map("n", "<leader>dD", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { des
 map("n", "<leader>do", "<cmd>Trouble symbols toggle focus=false<CR>", { desc = "Symbols" })
 map("n", "<leader>dr", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", { desc = "LSP references" })
 map("n", "<leader>dq", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix" })
-map("n", "<leader>dt", function()
-  require("lazy").load { plugins = { "todo-comments.nvim" }, wait = true }
-  vim.schedule(function()
-    vim.cmd "TodoTrouble"
-  end)
-end, { desc = "TODOs" })
-map("n", "]t", function()
-  require("lazy").load { plugins = { "todo-comments.nvim" }, wait = true }
-  vim.schedule(function()
-    require("todo-comments").jump_next()
-  end)
-end, { desc = "Next TODO" })
-map("n", "[t", function()
-  require("lazy").load { plugins = { "todo-comments.nvim" }, wait = true }
-  vim.schedule(function()
-    require("todo-comments").jump_prev()
-  end)
-end, { desc = "Previous TODO" })
-
+--
 -- File tree.
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
 map("n", "<leader>ee", "<cmd>NvimTreeFindFile<CR>", { desc = "Find current file" })
@@ -98,16 +79,6 @@ end, { desc = "Move buffer left" })
 map("n", "<leader>bl", function()
   require("nvchad.tabufline").move_buf(1)
 end, { desc = "Move buffer right" })
-
--- Help shortcuts for plugins whose default keymaps are worth learning.
-map("n", "<leader>hs", function()
-  require("lazy").load { plugins = { "nvim-surround" } }
-  vim.cmd "help nvim-surround.usage"
-end, { desc = "Surround help" })
-map("n", "<leader>hS", function()
-  require("lazy").load { plugins = { "nvim-surround" } }
-  vim.cmd "help nvim-surround.keymaps"
-end, { desc = "Surround keymaps" })
 
 map("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
