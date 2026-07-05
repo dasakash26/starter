@@ -14,7 +14,8 @@ autocmd("TextYankPost", {
   end,
 })
 
-autocmd({ "FocusGained", "BufEnter" }, {
+autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
   group = user,
   command = "checktime",
 })
+

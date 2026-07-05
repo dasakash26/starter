@@ -61,10 +61,9 @@ map("n", "<leader>dD", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { des
 map("n", "<leader>do", "<cmd>Trouble symbols toggle focus=false<CR>", { desc = "Symbols" })
 map("n", "<leader>dr", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", { desc = "LSP references" })
 map("n", "<leader>dq", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix" })
---
+
 -- File tree.
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Explorer" })
-map("n", "<leader>ee", "<cmd>NvimTreeFindFile<CR>", { desc = "Find current file" })
 
 -- Move buffers in tabufline.
 map("n", "<A-S-h>", function()
