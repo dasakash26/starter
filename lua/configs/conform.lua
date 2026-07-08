@@ -15,6 +15,8 @@ local options = {
     typescriptreact = { "prettier" },
     python = { "ruff_fix", "ruff_format" },
     rust = { "rustfmt" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
   },
 
   format_on_save = {

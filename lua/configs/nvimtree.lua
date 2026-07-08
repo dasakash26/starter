@@ -37,7 +37,7 @@ return vim.tbl_deep_extend("force", opts, {
           renamed = "R",
           untracked = "U",
           deleted = "D",
-          ignored = " ",
+          ignored = "-",
         },
       },
     },

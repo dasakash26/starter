@@ -49,6 +49,7 @@ M.mason = {
     "yaml-language-server",
     "prettier",
     "prisma-language-server",
+    "clang-format",
   },
 }
 

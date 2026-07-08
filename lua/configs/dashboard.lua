@@ -104,7 +104,8 @@ return {
 
     dash_empty_button(),
 
-    dash_button("󰒲  Plugins", "ll", "Lazy"),
+    dash_button("󰛱  LeetCode", "ll", "Leet"),
+    dash_button("󰒲  Plugins", "lp", "Lazy"),
     dash_button("󰏗  Tools", "mm", "Mason"),
     dash_button("  Mappings", "ch", "NvCheatsheet"),
 

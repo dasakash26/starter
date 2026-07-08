@@ -17,7 +17,13 @@ return {
     "xiyaowong/transparent.nvim",
     lazy = false,
     config = function()
-      require("transparent").setup()
+      require("transparent").setup({
+        extra_groups = {
+          "NormalFloat",
+          "NormalSB",
+          "FloatBorder",
+        },
+      })
       require("transparent").clear_prefix "NvimTree"
       require("transparent").clear_prefix "NvDash"
       require("transparent").clear_prefix "Tb"
@@ -106,6 +112,12 @@ return {
     end,
   },
 
+  {
+    "folke/which-key.nvim",
+    opts = require "configs.whichkey",
+  },
+
+
   -- Competitive programming workflow stays isolated from general web/dev tooling.
   {
     "xeluxee/competitest.nvim",
@@ -114,5 +126,44 @@ return {
     config = function()
       require("competitest").setup(require "configs.competitest")
     end,
+  },
+
+  {
+    "kawre/leetcode.nvim",
+    build = ":TSUpdate html",
+    cmd = "Leet",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    opts = require "configs.leetcode",
+  },
+  {
+    "3rd/image.nvim",
+    build = false,
+    dependencies = {
+      "kiyoon/magick.nvim",
+    },
+    opts = {
+      backend = "kitty",
+      integrations = {
+        markdown = {
+          enabled = true,
+          clear_in_insert_mode = false,
+          download_remote_images = true,
+          only_render_image_at_cursor = false,
+          filetypes = { "markdown", "vimwiki" },
+        },
+      },
+      max_width = nil,
+      max_height = nil,
+      max_width_window_percentage = nil,
+      max_height_window_percentage = 50,
+      window_overlap_clear_enabled = false,
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+      editor_only_render_when_focused = false,
+      tmux_show_only_in_active_window = false,
+      hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.svg" },
+    },
   },
 }

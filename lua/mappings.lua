@@ -23,7 +23,8 @@ map("v", "<", "<gv", { desc = "Indent left and reselect" })
 map("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Search and navigation.
-map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Files" })
+map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Files (shortcut)" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Grep (text)" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
 
@@ -51,9 +52,25 @@ end, { desc = "Show current file path" })
 map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr>")
 
 -- LSP lines are intentionally opt-in to keep diagnostics quiet by default.
-map("n", "<leader>l", function()
+map("n", "<leader>dt", function()
   require("configs.lsp_lines").toggle()
 end, { desc = "Toggle LSP lines" })
+
+map("n", "<leader>ds", function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  if vim.tbl_isempty(clients) then
+    vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
+    vim.notify("LSP started")
+  else
+    for _, client in ipairs(clients) do
+      vim.lsp.stop_client(client.id)
+    end
+    vim.notify("LSP stopped")
+  end
+end, { desc = "Toggle LSP" })
+
+map("n", "<leader>dR", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
+
 
 -- Trouble and TODO navigation. Use <leader>d* to avoid NvChad's <leader>x buffer close.
 map("n", "<leader>dd", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
@@ -124,3 +141,18 @@ map(
   { desc = "Start Persistent Receive", noremap = true, silent = true }
 )
 map("n", "<leader>tX", "<cmd>CompetiTest receive stop<CR>", { desc = "Stop Receiving", noremap = true, silent = true })
+
+-- LeetCode
+map("n", "<leader>ll", "<cmd>Leet<CR>", { desc = "LeetCode" })
+map("n", "<leader>ld", "<cmd>Leet daily<CR>", { desc = "Daily Question" })
+map("n", "<leader>li", "<cmd>Leet list<CR>", { desc = "List Problems" })
+map("n", "<leader>lr", "<cmd>Leet random<CR>", { desc = "Random Problem" })
+map("n", "<leader>lh", "<cmd>Leet info<CR>", { desc = "Question Info" })
+map("n", "<leader>lc", "<cmd>Leet console<CR>", { desc = "Toggle Console" })
+map("n", "<leader>lt", "<cmd>Leet run<CR>", { desc = "Run Code" })
+map("n", "<leader>ls", "<cmd>Leet submit<CR>", { desc = "Submit Solution" })
+map("n", "<leader>lo", "<cmd>Leet open<CR>", { desc = "Open in Browser" })
+map("n", "<leader>ly", "<cmd>Leet yank<CR>", { desc = "Yank Solution" })
+map("n", "<leader>lp", "<cmd>Leet tabs<CR>", { desc = "Question Tabs" })
+map("n", "<leader>lq", "<cmd>Leet exit<CR>", { desc = "Exit LeetCode" })
+
