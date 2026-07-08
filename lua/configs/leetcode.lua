@@ -70,7 +70,7 @@ local M = {
   },
 
   theme = {},
-  image_support = true,
+  image_support = false,
 }
 
 return M
