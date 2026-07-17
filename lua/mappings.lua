@@ -27,6 +27,10 @@ map("n", "<leader><leader>", "<cmd>Telescope find_files<CR>", { desc = "Files (s
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Grep (text)" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files" })
+map("n", "<leader>fi", function()
+  require("lazy").load { plugins = { "telescope-import.nvim" }, wait = true }
+  vim.cmd "Telescope import"
+end, { desc = "Search imports (interactive)" })
 
 -- LSP lookup and diagnostics.
 map("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Symbols (document)" })
@@ -39,13 +43,15 @@ map("n", "<leader>dP", "<cmd>PrettyTsErrors<CR>", { desc = "TS errors list" })
 map("n", "<leader>du", "<cmd>PrettyTsToggleAuto<CR>", { desc = "Toggle TS error popup" })
 
 -- Code helpers.
-map("n", "<leader>fi", function()
+map("n", "<leader>if", function()
   require("lazy").load { plugins = { "telescope-import.nvim" }, wait = true }
   vim.cmd "Telescope import"
-end, { desc = "Imports" })
+end, { desc = "Search imports (interactive)" })
+
+-- LSP Code Action (for single missing imports, quick fixes, etc.)
+map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 
 -- File-level utility mappings.
-map("n", "<leader>yy", 'ggVG"+y', { desc = "Yank full file to clipboard" })
 map("n", "<leader>yf", function()
   vim.notify(vim.fn.expand "%:p")
 end, { desc = "Show current file path" })
@@ -57,20 +63,19 @@ map("n", "<leader>dt", function()
 end, { desc = "Toggle LSP lines" })
 
 map("n", "<leader>ds", function()
-  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients { bufnr = 0 }
   if vim.tbl_isempty(clients) then
     vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
-    vim.notify("LSP started")
+    vim.notify "LSP started"
   else
     for _, client in ipairs(clients) do
       vim.lsp.stop_client(client.id)
     end
-    vim.notify("LSP stopped")
+    vim.notify "LSP stopped"
   end
 end, { desc = "Toggle LSP" })
 
 map("n", "<leader>dR", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
-
 
 -- Trouble and TODO navigation. Use <leader>d* to avoid NvChad's <leader>x buffer close.
 map("n", "<leader>dd", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
@@ -146,13 +151,12 @@ map("n", "<leader>tX", "<cmd>CompetiTest receive stop<CR>", { desc = "Stop Recei
 map("n", "<leader>ll", "<cmd>Leet<CR>", { desc = "LeetCode" })
 map("n", "<leader>ld", "<cmd>Leet daily<CR>", { desc = "Daily Question" })
 map("n", "<leader>li", "<cmd>Leet list<CR>", { desc = "List Problems" })
-map("n", "<leader>lr", "<cmd>Leet random<CR>", { desc = "Random Problem" })
 map("n", "<leader>lh", "<cmd>Leet info<CR>", { desc = "Question Info" })
 map("n", "<leader>lc", "<cmd>Leet console<CR>", { desc = "Toggle Console" })
 map("n", "<leader>lt", "<cmd>Leet run<CR>", { desc = "Run Code" })
+map("n", "<leader>lr", "<cmd>Leet run<CR>", { desc = "Run Code" })
 map("n", "<leader>ls", "<cmd>Leet submit<CR>", { desc = "Submit Solution" })
 map("n", "<leader>lo", "<cmd>Leet open<CR>", { desc = "Open in Browser" })
 map("n", "<leader>ly", "<cmd>Leet yank<CR>", { desc = "Yank Solution" })
 map("n", "<leader>lp", "<cmd>Leet tabs<CR>", { desc = "Question Tabs" })
 map("n", "<leader>lq", "<cmd>Leet exit<CR>", { desc = "Exit LeetCode" })
-

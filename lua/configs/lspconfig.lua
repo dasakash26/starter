@@ -28,7 +28,7 @@ require "configs.lsp_lines"
 vim.lsp.config("clangd", {
   cmd = {
     "/opt/homebrew/opt/llvm/bin/clangd",
-    "--query-driver=/opt/homebrew/opt/llvm/bin/clang++",
+    "--query-driver=/opt/homebrew/opt/llvm/bin/clang*",
     "--fallback-style=llvm",
   },
 })
